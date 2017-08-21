@@ -1,2 +1,2 @@
-# burger
-Eat-Da-Burger App Using Handlebars &amp; MySql
+# burgerSequelized
+A sequelized version of the eat da burger app incorporating node.js, express.js, Sequelize &amp; Handlebars.
