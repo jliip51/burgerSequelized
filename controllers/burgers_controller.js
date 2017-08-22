@@ -24,7 +24,6 @@ router.get("/", function(req, res) {
       burger: data,
       total: getSum(data)
     };
-    console.log(hbsObject);
     res.render("index", hbsObject);
   });
 });
@@ -45,7 +44,6 @@ router.post("/add", function(req, res) {
       total: getSum(data),
       alert: 'Input Name Before Clicking Submit Button.'
     };
-    console.log(hbsObject);
     res.render("index", hbsObject);
   });
 }
@@ -53,8 +51,6 @@ router.post("/add", function(req, res) {
 
 router.put("/:id", function(req, res) {
   var updateObj;
-  console.log(req.body.devoured);
-  console.log(typeof req.body.devoured)
   if (req.body.devoured === "true") {
     updateObj = {
       devoured: true,

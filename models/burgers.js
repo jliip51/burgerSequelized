@@ -6,8 +6,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: {
         len: {
-          args:[1, 50],
-          msg: "Your to-do item name must be between 3 and 50 characters.  Please try again."
+          args: [1, 50],
+          msg: "Your to-do item name must be between 1 and 50 characters."
         }
       }
     },
