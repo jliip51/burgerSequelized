@@ -1,5 +1,6 @@
 var express = require('express');
-var burgers = require('../models/burger.js');
+var sequelize = require('sequelize');
+var db = require('../models');
 
 var router = express.Router();
 
@@ -17,7 +18,8 @@ var router = express.Router();
 };
 
 router.get("/", function(req, res) {
-  burgers.all(function(data) {
+  db.Burgers.findAll({
+  }).then(function(data) {
     var hbsObject = {
       burger: data,
       total: getSum(data)
@@ -28,16 +30,16 @@ router.get("/", function(req, res) {
 });
 
 router.post("/add", function(req, res) {
-  console.log("New Name Test:" + req.body.name +":Test");
-  console.log(req.body.name.length)
   if (req.body.name.length > 0 && req.body.name !== " ")  {
-    console.log(req.body.name);
-    burgers.create(req.body.name, function(resp) {
+    db.Burgers.create({
+      burger_name: req.body.name
+    }).then(function(resp) {
       console.log(resp);
       return res.redirect("/");
     });
   } else {
-  burgers.all(function(data) {
+  db.Burgers.findAll({
+  }).then(function(data) {
     var hbsObject = {
       burger: data,
       total: getSum(data),
@@ -50,7 +52,23 @@ router.post("/add", function(req, res) {
 });
 
 router.put("/:id", function(req, res) {
-  burgers.update(req.params.id, req.body.devoured, function(result) {
+  var updateObj;
+  console.log(req.body.devoured);
+  console.log(typeof req.body.devoured)
+  if (req.body.devoured === "true") {
+    updateObj = {
+      devoured: true,
+      count_eaten: sequelize.literal('count_eaten +1')
+    }
+  } else {
+    updateObj = {devoured: false};
+  }
+    db.Burgers.update(updateObj,
+    {
+    where: {
+      id: req.params.id
+    }
+  }).then(function(result) {
   console.log(result);
   res.redirect("/");
   });

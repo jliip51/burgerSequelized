@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="jumbotron">
-    <h1 id="sign-name" class="text-center"><a href="" id="sign-glow">Eat Da' Burgers!</a></h1>
+    <h1 id="sign-name" class="text-center"><a href="" id="sign-glow">Eat Mor Burgers!</a></h1>
   </div>
   <div class="row">
     <div class="col-xs-5 text-center">
@@ -9,7 +9,7 @@
         {{#unless this.devoured}}
             <form class="form-inline" action="/{{this.id}}?_method=PUT" method="POST">
               <label id="ready-items">{{this.burger_name}}</label>
-              <input type="hidden" name="devoured" value={{this.devoured}}>
+              <input type="hidden" name="devoured" value="true">
              <button type="submit" class="btn btn-sm btn-danger" id="eat-btn">
                <span class="glyphicon glyphicon-triangle-left"></span> Devour!</button>
            </form>
@@ -37,8 +37,8 @@
       {{#if this.devoured}}
           <form class="form-inline" action="/{{this.id}}?_method=PUT" method="POST">
             <label id="ready-items">{{this.burger_name}}</label>
-            <input type="hidden" name="devoured" value={{this.devoured}}>
-           <button type="submit" class="btn btn-sm btn-primary" id="eat-btn">
+            <input type="hidden" name="devoured" value="false">
+            <button type="submit" class="btn btn-sm btn-primary" id="eat-btn">
              <span class="glyphicon glyphicon-triangle-left"></span> RE-N-CARN-ATE!</button>
          </form>
         {{/if}}
